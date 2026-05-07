@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>להרוויח כמו ווינרית ביזנס | חן כלפון</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Heebo:wght@100;200;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #121212;
+            --offwhite: #F7F5F1;
+            --pink: #EFD7DE;
+            --pink-mid: #e8c4cf;
+            --pink-deep: #d4a0b0;
+            --gold: #C8A04D;
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: var(--offwhite);
+            color: var(--black);
+            overflow-x: hidden;
+            direction: rtl;
+            line-height: 1.6;
+        }
+
+        /* ═══════ PRELOADER ═══════ */
+        .preloader {
+            position: fixed; inset: 0;
+            background: var(--black);
+            z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 0;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .preloader-text {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--pink); letter-spacing: 14px;
+            text-transform: uppercase; font-weight: 800;
+            opacity: 0;
+            animation: preloaderIn 0.8s ease forwards 0.2s;
+        }
+        .preloader-line {
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--pink-deep));
+            animation: preloaderLine 1.2s ease forwards 0.6s;
+        }
+        .preloader-sub {
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.7rem; color: var(--pink);
+            letter-spacing: 4px; text-transform: uppercase;
+            opacity: 0;
+            animation: preloaderIn 0.6s ease forwards 1s;
+        }
+        @keyframes preloaderIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes preloaderLine {
+            from { width: 0; }
+            to { width: 120px; }
+        }
+
+        /* ═══════ FLOATING SHAPES ═══════ */
+        .bg-shape {
+            position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+        }
+
+        /* ═══════ NAVBAR ═══════ */
+        .navbar {
+            position: fixed; top: 0; right: 0; left: 0; z-index: 1000;
+            padding: 16px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.4s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(247,245,241,0.92);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 40px rgba(0,0,0,0.04);
+        }
+        .nav-logo {
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.85rem; font-weight: 700;
+            color: var(--black); letter-spacing: 2px;
+            text-decoration: none;
+        }
+        .nav-logo em {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-style: normal;
+            font-size: 1.1rem;
+        }
+        .nav-cta-btn {
+            padding: 10px 24px;
+            background: var(--pink);
+            color: var(--black);
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none; border: none;
+            transition: all 0.4s ease; cursor: pointer;
+            border-radius: 30px;
+        }
+        .nav-cta-btn:hover {
+            background: var(--pink-mid);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239,215,222,0.5);
+        }
+
+        /* ═══════ HERO ═══════ */
+        .hero {
+            min-height: auto;
+            display: flex; align-items: flex-start;
+            position: relative; overflow: hidden;
+            padding: 0 3% 0; margin-bottom: 0;
+            background: var(--black);
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 60%, rgba(239,215,222,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, rgba(200,160,77,0.05) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative; z-index: 2; width: 100%;
+            display: grid; grid-template-columns: 1fr;
+            gap: 30px; align-items: center; text-align: center;
+            max-width: 1300px; margin: 0 auto;
+        }
+        .hero-text { position: relative; z-index: 2; }
+        .hero-tag {
+            display: inline-block; margin-bottom: 8px; margin-top: 0;
+            background: rgba(239,215,222,0.1);
+            border: 1px solid rgba(239,215,222,0.15);
+            color: var(--pink); font-size: 11px; font-weight: 600;
+            padding: 8px 22px; border-radius: 30px;
+            letter-spacing: 1px;
+        }
+        .hero-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 6rem);
+            font-weight: 800; line-height: 1.08;
+            color: var(--offwhite); margin-bottom: 0;
+        }
+        .hero-title .line {
+            display: block; opacity: 0;
+            animation: heroLineIn 0.7s ease forwards;
+        }
+        .hero-title .line:nth-child(1) { animation-delay: 0.3s; }
+        .hero-title .line:nth-child(2) { animation-delay: 0.5s; }
+        .hero-title .line:nth-child(3) { animation-delay: 0.7s; }
+        .hero-title .line:nth-child(4) { animation-delay: 0.9s; }
+        .hero-title .line:nth-child(5) { animation-delay: 1.1s; }
+        @keyframes heroLineIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-title .pink-text { color: var(--pink); }
+        .hero-title .gold-text {
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(200,160,77,0.3);
+        }
+        .hero-title .glow-word {
+            color: var(--pink); position: relative; display: inline-block;
+        }
+        .hero-title .glow-word::after {
+            content: ''; position: absolute;
+            bottom: -2px; right: -5%; width: 110%; height: 14px;
+            background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--pink-deep));
+            opacity: 0.25; z-index: -1; border-radius: 4px; transform: skewX(-5deg);
+        }
+        .hero-chen {
+            width: 100%; max-width: 550px;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.4));
+            position: relative; z-index: 2;
+            opacity: 0;
+            animation: heroImgIn 1s ease forwards 0.5s;
+        }
+        @keyframes heroImgIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .hero-image-area {
+            position: relative; display: flex;
+            justify-content: center; align-items: flex-end;
+        }
+        .hero-glow {
+            position: absolute; width: 110%; height: 110%;
+            top: -5%; right: -5%; border-radius: 50%;
+            background: radial-gradient(circle, rgba(239,215,222,0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        .hero-bg-text {
+            position: absolute;
+            font-family: 'Assistant', sans-serif;
+            font-weight: 800; font-size: clamp(8rem, 20vw, 16rem);
+            color: rgba(247,245,241,0.02); letter-spacing: 15px;
+            bottom: 5%; left: 50%; transform: translateX(-50%);
+            white-space: nowrap; pointer-events: none; z-index: 0;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem; font-weight: 300;
+            color: rgba(18,18,18,0.55); line-height: 1.9;
+            max-width: 480px; margin-bottom: 35px;
+        }
+
+        .hero-buttons { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
+
+        .btn-pink {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--pink-mid), var(--pink));
+            color: var(--black);
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.85rem; font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none; border: none; cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(239,215,222,0.4);
+        }
+        .btn-pink:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(239,215,222,0.6);
+            background: linear-gradient(135deg, var(--pink-deep), var(--pink-mid));
+        }
+
+        .hero-image-area { position: relative; display: flex; justify-content: center; align-self: flex-end; margin-bottom: 0; }
+
+        .hero-img-main {
+            width: 78%; aspect-ratio: 3/4;
+            object-fit: cover; border-radius: 180px 180px 20px 20px;
+            filter: grayscale(30%) contrast(1.05);
+            transition: filter 0.5s ease;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+            position: relative; z-index: 2;
+        }
+        .hero-img-main:hover { filter: grayscale(5%); }
+
+        .hero-pink-circle {
+            position: absolute; width: 115%; height: 115%;
+            top: -8%; right: -8%;
+            border-radius: 50%;
+            border: 1.5px solid var(--pink); opacity: 0.25; z-index: 0;
+        }
+
+        .hero-float-badge {
+            position: absolute; top: 12%; left: -8%;
+            background: white; padding: 16px 20px;
+            border-radius: 16px; z-index: 4;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        .hero-float-badge .num {
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.6rem; font-weight: 700;
+            color: var(--pink-deep); line-height: 1;
+        }
+        .hero-float-badge .lbl {
+            font-size: 0.5rem; letter-spacing: 1px;
+            text-transform: uppercase; color: rgba(18,18,18,0.4); margin-top: 3px;
+        }
+
+        .hero-watermark {
+            position: absolute;
+            font-family: 'Assistant', sans-serif; 
+            font-size: clamp(4rem, 10vw, 9rem);
+            color: var(--pink); opacity: 0.06;
+            bottom: 3%; right: -5%;
+            white-space: nowrap; pointer-events: none; z-index: 1;
+        }
+
+        .hero-year-tag {
+            margin-bottom: 15px;
+            background: var(--pink); color: var(--pink-deep);
+            font-size: 0.7rem; font-weight: 700;
+            padding: 6px 18px; border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* ═══════ PINK DIVIDER ═══════ */
+        .pink-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--pink), var(--pink-mid), var(--pink), transparent);
+        }
+
+        /* ═══════ MARQUEE ═══════ */
+        .marquee {
+            padding: 20px 0; overflow: hidden;
+            background: var(--black);
+        }
+        .marquee-track {
+            display: flex; gap: 40px;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.75rem; letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(247,245,241,0.85); font-weight: 700;
+            display: flex; align-items: flex-start; gap: 40px;
+            white-space: nowrap;
+        }
+        .marquee-item .dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--pink); opacity: 1;
+        }
+        @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(33.33%)} }
+
+        /* ═══════ PAIN SECTION ═══════ */
+        .section-pain {
+            padding: 70px 5%;
+            position: relative; overflow: hidden;
+        }
+        .pain-content {
+            max-width: 800px; margin: 0 auto;
+        }
+        .pain-label {
+            font-size: 0.6rem; letter-spacing: 5px;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 18px; font-weight: 600;
+            text-align: center;
+        }
+        .pain-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700; line-height: 1.3;
+            color: var(--black); margin-bottom: 10px;
+            text-align: center;
+        }
+        .pain-title .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-weight: 700;
+        }
+        .pain-subtitle {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-weight: 800; color: var(--pink-deep);
+            text-align: center; margin-bottom: 40px;
+            
+        }
+
+        .pain-text {
+            font-size: 1.05rem; font-weight: 300;
+            color: rgba(18,18,18,0.6); line-height: 2;
+            text-align: center;
+        }
+        .pain-text strong {
+            color: var(--black); font-weight: 600;
+        }
+        .pain-text .pink-bold {
+            color: var(--pink-deep); font-weight: 600;
+        }
+        .pain-text .highlight-line {
+            display: block; margin: 25px 0;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--black);
+        }
+        .pain-text .small-break { display: block; margin: 15px 0; }
+
+        .pain-box {
+            background: white; border-radius: 20px;
+            padding: 35px; margin: 35px 0;
+            border-right: 4px solid var(--pink);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+        .pain-box p {
+            font-size: 1rem; font-weight: 800;
+            color: rgba(18,18,18,0.6); line-height: 1.9;
+        }
+        .pain-box .pink-bold { color: var(--pink-deep); font-weight: 600; }
+
+        .pain-promise {
+            margin-top: 40px; text-align: center;
+            padding: 30px; border-radius: 20px;
+            background: linear-gradient(135deg, rgba(239,215,222,0.3), rgba(239,215,222,0.1));
+        }
+        .pain-promise p {
+            font-size: 1.05rem; font-weight: 800;
+            color: rgba(18,18,18,0.6); line-height: 2;
+        }
+        .pain-promise strong { color: var(--black); }
+
+        /* ═══════ ABOUT / CHEN ═══════ */
+        .section-about {
+            padding: 70px 5%;
+            background: var(--black);
+            position: relative; overflow: hidden;
+        }
+        .section-about::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(239,215,222,0.06), transparent 60%);
+        }
+        .about-grid {
+            display: grid; grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px; align-items: center;
+            max-width: 1100px; margin: 0 auto;
+            position: relative; z-index: 1;
+        }
+        .about-image-area { position: relative; }
+        .about-img {
+            width: 100%; aspect-ratio: 3/4;
+            object-fit: cover; border-radius: 20px;
+            filter: grayscale(40%);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+        .about-pink-frame {
+            position: absolute; top: -12px; right: -12px;
+            width: 100px; height: 100px;
+            border-top: 2px solid var(--pink-deep);
+            border-right: 2px solid var(--pink-deep);
+            border-radius: 0 16px 0 0;
+            opacity: 0.4;
+        }
+
+        .about-label {
+            font-size: 0.6rem; letter-spacing: 5px;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 15px; font-weight: 600;
+        }
+        .about-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 900; line-height: 1.2;
+            color: var(--offwhite); margin-bottom: 20px;
+        }
+        .about-title .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink); font-weight: 800;
+        }
+        .about-text {
+            font-size: 1rem; font-weight: 300;
+            color: rgba(247,245,241,0.55); line-height: 2;
+            margin-bottom: 25px;
+        }
+        .about-text strong { color: var(--offwhite); font-weight: 600; }
+        .about-text .pink { color: var(--pink); }
+
+        .about-stats {
+            display: flex; gap: 30px; margin-top: 25px;
+        }
+        .about-stat {
+            text-align: center;
+        }
+        .about-stat .num {
+            font-family: 'Assistant', sans-serif;
+            font-size: 2rem; font-weight: 700;
+            color: var(--pink); line-height: 1;
+        }
+        .about-stat .lbl {
+            font-size: 0.6rem; letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(247,245,241,0.3); margin-top: 4px;
+        }
+
+        /* ═══════ MY STORY ═══════ */
+        .section-story {
+            padding: 70px 5%;
+            position: relative;
+        }
+        .story-content {
+            max-width: 800px; margin: 0 auto; text-align: center;
+        }
+        .story-text {
+            font-size: 1.05rem; font-weight: 300;
+            color: rgba(18,18,18,0.6); line-height: 2;
+        }
+        .story-text strong { color: var(--black); font-weight: 600; }
+        .story-text .pink-bold { color: var(--pink-deep); font-weight: 600; }
+        .story-text .highlight-line {
+            display: block; margin: 25px 0;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--black);
+        }
+
+        .story-proof {
+            margin: 40px auto; padding: 25px;
+            background: var(--pink); border-radius: 16px;
+            max-width: 500px;
+        }
+        .story-proof p {
+            font-size: 0.95rem; 
+            color: rgba(18,18,18,0.6);
+        }
+
+        /* ═══════ BREAKTHROUGH ═══════ */
+        .section-breakthrough {
+            padding: 70px 5%;
+            background: linear-gradient(180deg, var(--offwhite) 0%, var(--pink) 50%, var(--offwhite) 100%);
+            position: relative;
+        }
+        .breakthrough-content {
+            max-width: 800px; margin: 0 auto; text-align: center;
+        }
+        .breakthrough-text {
+            font-size: 1.05rem; font-weight: 300;
+            color: rgba(18,18,18,0.6); line-height: 2;
+        }
+        .breakthrough-text strong { color: var(--black); font-weight: 600; }
+        .breakthrough-text .pink-bold { color: var(--pink-deep); font-weight: 700; }
+        .breakthrough-text .highlight-line {
+            display: block; margin: 30px 0;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.4rem; font-weight: 700;
+            color: var(--black);
+        }
+        .breakthrough-text .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-weight: 700;
+        }
+
+        /* ═══════ VIDEO TESTIMONIALS ═══════ */
+        .section-videos {
+            padding: 60px 5%;
+        }
+        .section-tag {
+            text-align: center; margin-bottom: 12px;
+            font-size: 0.6rem; letter-spacing: 5px;
+            text-transform: uppercase; color: var(--gold); font-weight: 600;
+        }
+        .section-title {
+            text-align: center; margin-bottom: 50px;
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 900; color: var(--black);
+        }
+        .section-title .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-weight: 800;
+        }
+
+        .videos-grid {
+            display: grid; grid-template-columns: repeat(4,1fr);
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .video-placeholder {
+            aspect-ratio: 9/16; border-radius: 16px;
+            background: linear-gradient(135deg, var(--pink), var(--pink-mid));
+            display: flex; align-items: flex-start; justify-content: center;
+            cursor: pointer; transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .video-placeholder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(239,215,222,0.4);
+        }
+        .video-placeholder .play-btn {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            display: flex; align-items: flex-start; justify-content: center;
+            font-size: 1.2rem; color: var(--pink-deep);
+        }
+
+        /* ═══════ METHOD / 3 STEPS ═══════ */
+        .section-method {
+            padding: 70px 5%;
+            background: var(--black);
+            position: relative; overflow: hidden;
+        }
+        .section-method::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, rgba(239,215,222,0.04), transparent 60%);
+        }
+
+        .method-intro {
+            max-width: 750px; margin: 0 auto 60px; text-align: center;
+            position: relative; z-index: 1;
+        }
+        .method-intro-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700; color: var(--offwhite);
+            line-height: 1.3; margin-bottom: 10px;
+        }
+        .method-intro-title .pink { color: var(--pink); }
+        .method-intro-title .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink); font-weight: 800;
+        }
+        .method-intro-sub {
+            font-size: 1rem; color: rgba(247,245,241,0.4);
+            
+        }
+
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 25px; max-width: 1100px; margin: 0 auto;
+            position: relative; z-index: 1;
+        }
+        .step-card {
+            background: rgba(247,245,241,0.04);
+            border: 1px solid rgba(239,215,222,0.1);
+            border-radius: 20px; padding: 40px 28px;
+            text-align: center; transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .step-card::before {
+            content: ''; position: absolute; top: 0; right: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--pink-deep));
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .step-card:hover { background: rgba(247,245,241,0.07); }
+        .step-card:hover::before { opacity: 1; }
+
+        .step-num {
+            font-family: 'Assistant', sans-serif;
+            font-size: 3rem; font-weight: 700;
+            color: var(--pink); opacity: 0.2; line-height: 1;
+            margin-bottom: 15px;
+        }
+        .step-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.15rem; font-weight: 700;
+            color: var(--offwhite); margin-bottom: 12px;
+        }
+        .step-text {
+            font-size: 0.9rem; font-weight: 300;
+            color: rgba(247,245,241,0.45); line-height: 1.8;
+        }
+
+        .method-summary {
+            max-width: 700px; margin: 50px auto 0;
+            text-align: center; position: relative; z-index: 1;
+        }
+        .method-summary p {
+            font-size: 1.1rem; color: rgba(247,245,241,0.5);
+            line-height: 1.9;
+        }
+        .method-summary strong { color: var(--pink); }
+
+        /* ═══════ CAR METAPHOR ═══════ */
+        .section-metaphor {
+            padding: 70px 5%;
+            position: relative;
+        }
+        .metaphor-content {
+            max-width: 800px; margin: 0 auto; text-align: center;
+        }
+        .metaphor-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+            font-weight: 700; color: var(--black);
+            margin-bottom: 40px; line-height: 1.3;
+        }
+        .metaphor-title .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-weight: 800; 
+        }
+
+        .metaphor-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 20px; margin-bottom: 50px;
+        }
+        .metaphor-card {
+            background: white; border-radius: 20px;
+            padding: 30px 22px; text-align: center;
+            border: 1px solid rgba(239,215,222,0.3);
+            transition: all 0.4s ease;
+        }
+        .metaphor-card:hover {
+            border-color: var(--pink);
+            box-shadow: 0 15px 40px rgba(239,215,222,0.3);
+            transform: translateY(-5px);
+        }
+        .metaphor-icon {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--pink); margin: 0 auto 15px;
+            display: flex; align-items: flex-start; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .metaphor-card h4 {
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.1rem; font-weight: 700;
+            color: var(--black); margin-bottom: 6px;
+        }
+        .metaphor-card p {
+            font-size: 0.85rem; color: rgba(18,18,18,0.5);
+            line-height: 1.6;
+        }
+
+        .metaphor-text {
+            font-size: 1.05rem; font-weight: 300;
+            color: rgba(18,18,18,0.6); line-height: 2;
+        }
+        .metaphor-text strong { color: var(--black); font-weight: 600; }
+        .metaphor-text .pink-bold { color: var(--pink-deep); font-weight: 600; }
+        .metaphor-text .highlight-line {
+            display: block; margin: 25px 0;
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--black);
+        }
+
+        /* ═══════ PROGRAM ACTION ═══════ */
+        .section-action {
+            padding: 70px 5%;
+            background: linear-gradient(135deg, var(--pink) 0%, rgba(239,215,222,0.3) 100%);
+            text-align: center;
+        }
+        .action-content { max-width: 700px; margin: 0 auto; }
+        .action-title {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 900; color: var(--black);
+            margin-bottom: 20px; line-height: 1.2;
+        }
+        .action-title .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-weight: 800;
+        }
+        .action-text {
+            font-size: 1.05rem; font-weight: 800;
+            color: rgba(18,18,18,0.6); line-height: 1.9;
+            margin-bottom: 35px;
+        }
+        .action-text strong { color: var(--black); font-weight: 600; }
+
+        .btn-cta-big {
+            display: inline-flex; align-items: center; gap: 12px;
+            padding: 20px 55px;
+            background: var(--black);
+            color: var(--offwhite);
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.9rem; font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none; border: none; cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.5s ease;
+            box-shadow: 0 12px 40px rgba(18,18,18,0.15);
+        }
+        .btn-cta-big:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(18,18,18,0.25);
+        }
+
+        /* ═══════ PROGRAM DETAILS ═══════ */
+        .section-program {
+            padding: 70px 5%;
+        }
+
+        .program-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 22px; max-width: 1100px; margin: 0 auto;
+        }
+        .program-card {
+            background: white; border-radius: 20px;
+            padding: 35px 28px; position: relative;
+            border: 1px solid rgba(239,215,222,0.3);
+            overflow: hidden; transition: all 0.4s ease;
+        }
+        .program-card::before {
+            content: ''; position: absolute;
+            top: 0; right: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--pink), var(--pink-deep));
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(239,215,222,0.3);
+            border-color: var(--pink);
+        }
+
+        .program-card-icon {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--pink); margin-bottom: 18px;
+            display: flex; align-items: flex-start; justify-content: center;
+            font-size: 1rem; color: var(--pink-deep);
+        }
+        .program-card h3 {
+            font-family: 'Assistant', sans-serif;
+            font-size: 1.15rem; font-weight: 700;
+            color: var(--black); margin-bottom: 10px;
+        }
+        .program-card p {
+            font-size: 0.9rem; font-weight: 300;
+            color: rgba(18,18,18,0.5); line-height: 1.7;
+        }
+
+        /* ═══════ FINAL CTA ═══════ */
+        .section-final-cta {
+            padding: 70px 5%;
+            position: relative; overflow: hidden; text-align: center;
+        }
+        .cta-pink-bg {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            width: 700px; height: 700px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(239,215,222,0.5) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .cta-bg-script {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            font-family: 'Assistant', sans-serif; 
+            font-size: clamp(5rem, 13vw, 11rem);
+            color: var(--pink); opacity: 0.06;
+            white-space: nowrap; pointer-events: none;
+        }
+        .cta-content { position: relative; z-index: 2; max-width: 650px; margin: 0 auto; }
+        .cta-heading {
+            font-family: 'Assistant', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900; line-height: 1.15;
+            color: var(--black); margin-bottom: 20px;
+        }
+        .cta-heading .script {
+            font-family: 'Assistant', sans-serif; 
+            color: var(--pink-deep); font-weight: 800;
+        }
+        .cta-sub {
+            font-size: 1rem; font-weight: 300;
+            color: rgba(18,18,18,0.45); line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        .cta-note {
+            margin-top: 18px; font-size: 0.7rem;
+            color: rgba(18,18,18,0.25); font-weight: 300;
+        }
+
+        /* ═══════ FOOTER ═══════ */
+        footer {
+            background: var(--black);
+            padding: 40px 5% 25px;
+        }
+        .footer-inner {
+            max-width: 1100px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-logo {
+            font-family: 'Assistant', sans-serif;
+            font-size: 0.8rem; font-weight: 600;
+            color: rgba(247,245,241,0.4); letter-spacing: 2px;
+        }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a {
+            font-size: 0.65rem; letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(247,245,241,0.2);
+            text-decoration: none; transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--pink); }
+        .footer-bottom {
+            max-width: 1100px; margin: 25px auto 0;
+            padding-top: 15px;
+            border-top: 1px solid rgba(247,245,241,0.04);
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-size: 0.5rem; letter-spacing: 2px;
+            color: rgba(247,245,241,0.1); text-transform: uppercase;
+        }
+
+        /* ═══════ ANIMATIONS ═══════ */
+        .reveal {
+            opacity: 0; transform: translateY(35px);
+            transition: all 0.7s cubic-bezier(.25,.46,.45,.94);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: .15s; }
+        .reveal-d2 { transition-delay: .3s; }
+        .reveal-d3 { transition-delay: .45s; }
+
+        /* ═══════ RESPONSIVE ═══════ */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 6.5vw !important; line-height: 1.08 !important; }
+            .hero-content { grid-template-columns: 1fr !important; text-align: center !important; gap: 0 !important; }
+            .hero-text { order: 1 !important; }
+            .hero-image-area { order: 2 !important; margin-bottom: 0 !important; }
+            .hero-chen { max-width: 100% !important; width: 100% !important; margin: 0 !important; margin-bottom: -10px !important; display: block !important; padding: 0 !important; }
+            .hero-tag { font-size: 16px !important; padding: 10px 24px !important; }
+            .hero-tag { font-size: 10px !important; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-image-area { max-width: 350px; margin: 0 auto; }
+            .steps-grid, .metaphor-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+            .videos-grid { grid-template-columns: repeat(2,1fr); }
+            .program-grid { grid-template-columns: 1fr; }
+            .hero { padding-bottom: 0 !important; margin-bottom: 0 !important; overflow: hidden !important; }
+            .section-pain, .section-story, .section-breakthrough, .section-method, .section-metaphor, .section-action, .section-program, .section-final-cta { padding: 60px 5%; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 80px 4% 0 !important; }
+            .hero-chen { max-width: 100% !important; width: 100% !important; }
+            .hero-tag { font-size: 16px !important; padding: 10px 24px !important; }
+            .hero-tag { font-size: 9px !important; padding: 6px 14px !important; }
+            .preloader img { margin-bottom: -35px !important; }
+            .preloader-text { letter-spacing: 8px !important; }
+            .footer-inner { flex-direction: column; gap: 15px; text-align: center; }
+            .about-grid { gap: 30px; }
+            .about-stats { justify-content: center; flex-wrap: wrap; }
+            .about-title { font-size: clamp(1.4rem, 5vw, 2rem) !important; }
+            .videos-grid { grid-template-columns: repeat(2,1fr); max-width: 350px; margin: 0 auto; }
+            .metaphor-grid { gap: 15px; }
+            .pain-title { font-size: clamp(1.3rem, 5vw, 1.8rem) !important; }
+            .section-title { font-size: clamp(1.4rem, 5vw, 2rem) !important; }
+            .method-intro-title { font-size: clamp(1.3rem, 5vw, 1.8rem) !important; }
+            .marquee-item { font-size: 1rem !important; letter-spacing: 3px !important; gap: 25px !important; }
+            .marquee-track { gap: 25px !important; }
+            .btn-cta-big { padding: 16px 40px; font-size: 0.8rem; }
+            .stats-grid { grid-template-columns: repeat(2,1fr); }
+            .win-watermark { font-size: clamp(3rem, 12vw, 6rem) !important; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 8.2vw !important; line-height: 1.08 !important; }
+            .hero-chen { max-width: 100% !important; width: 100% !important; }
+            .hero-tag { font-size: 16px !important; padding: 10px 24px !important; }
+            .videos-grid { grid-template-columns: 1fr; max-width: 250px; }
+            .about-stat .num { font-size: 1.5rem; }
+            .step-card { padding: 30px 20px; }
+            .metaphor-card { padding: 22px 16px; }
+            .program-card { padding: 28px 20px; }
+        }
+        /* ═══════ WIN WATERMARK ═══════ */
+        .win-watermark {
+            position: absolute;
+            font-family: 'Assistant', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+        }
+        .win-watermark-light {
+            color: rgba(239,215,222,0.06);
+            font-size: clamp(6rem, 18vw, 14rem);
+        }
+        .win-watermark-dark {
+            color: rgba(247,245,241,0.03);
+            font-size: clamp(6rem, 18vw, 14rem);
+        }
+        .win-watermark-gold {
+            color: rgba(200,160,77,0.04);
+            font-size: clamp(5rem, 15vw, 12rem);
+        }
+        @media (min-width: 1025px) {
+            .hero-content { grid-template-columns: 0.7fr 1.3fr; gap: 20px; text-align: right; }
+            .hero-text { order: 1; text-align: right; }
+            .hero-image-area { order: 2; align-self: flex-end; margin-bottom: 0; }
+            .hero-chen { max-width: none; width: 115%; margin-left: -15%; margin-bottom: -5px; display: block; }
+            .preloader img { margin-bottom: -150px !important; }
+        }
+        .win-pattern {
+            position: absolute; inset: 0; overflow: hidden;
+            pointer-events: none; z-index: 0;
+        }
+        .win-pattern::before {
+            content: "WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN WIN";
+            position: absolute; inset: -50%;
+            font-family: "Assistant", sans-serif;
+            font-weight: 800; font-size: 2.5rem;
+            color: rgba(239,215,222,0.03);
+            letter-spacing: 10px; line-height: 1.8;
+            word-spacing: 20px;
+            transform: rotate(-15deg);
+            white-space: normal;
+        }
+        .win-pattern-dark::before {
+            color: rgba(247,245,241,0.02);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-text">WINERIT</div>
+        <div class="preloader-line" style="margin:15px 0"></div><div class="preloader-sub">loading your future</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar" style="display:none">
+        <a href="#" class="nav-logo"><em>W</em> חן כלפון</a>
+        
+    </nav>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero"><div class="win-pattern win-pattern-dark"></div>
+        <div class="hero-bg-text">WIN</div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-tag">השנה את פורצת את תקרת הזכוכית</div>
+                <h1 class="hero-title">
+                    <span class="line" style="width: 732px">בואי לרפא את פצעי</span>
+                    <span class="line" style="width: 671px">הכסף שלך ולבנות </span>
+                    <span class="line" style="width: 733px">עסק מנצח של 30K+</span>
+                    <span class="line"><span class="glow-word">בזהות של ווינרית</span></span>
+                </h1>
+            </div>
+            <div class="hero-image-area">
+                <div class="hero-glow"></div>
+                <img src="chen1.png" alt="חן כלפון" class="hero-chen">
+            </div>
+        </div>
+    </section>
+
+    <!-- DIVIDER + MARQUEE -->
+    <div class="pink-divider" style="margin:0;padding:0;line-height:0;"></div>
+    <div class="marquee">
+        <div class="marquee-track">
+            <div class="marquee-item">זהות <span class="dot"></span></div>
+            <div class="marquee-item">חסמים <span class="dot"></span></div>
+            <div class="marquee-item">אמונות <span class="dot"></span></div>
+            <div class="marquee-item">מודל עסקי <span class="dot"></span></div>
+            <div class="marquee-item">מוצר דיגיטלי <span class="dot"></span></div>
+            <div class="marquee-item">מותג <span class="dot"></span></div>
+            <div class="marquee-item">תוכן <span class="dot"></span></div>
+            <div class="marquee-item">מכירות <span class="dot"></span></div>
+            <div class="marquee-item">ממומן <span class="dot"></span></div>
+            <div class="marquee-item">זהות <span class="dot"></span></div>
+            <div class="marquee-item">חסמים <span class="dot"></span></div>
+            <div class="marquee-item">אמונות <span class="dot"></span></div>
+            <div class="marquee-item">מודל עסקי <span class="dot"></span></div>
+            <div class="marquee-item">מוצר דיגיטלי <span class="dot"></span></div>
+            <div class="marquee-item">מותג <span class="dot"></span></div>
+            <div class="marquee-item">תוכן <span class="dot"></span></div>
+            <div class="marquee-item">מכירות <span class="dot"></span></div>
+            <div class="marquee-item">ממומן <span class="dot"></span></div>
+            <div class="marquee-item">זהות <span class="dot"></span></div>
+            <div class="marquee-item">חסמים <span class="dot"></span></div>
+            <div class="marquee-item">אמונות <span class="dot"></span></div>
+            <div class="marquee-item">מודל עסקי <span class="dot"></span></div>
+            <div class="marquee-item">מוצר דיגיטלי <span class="dot"></span></div>
+            <div class="marquee-item">מותג <span class="dot"></span></div>
+            <div class="marquee-item">תוכן <span class="dot"></span></div>
+            <div class="marquee-item">מכירות <span class="dot"></span></div>
+            <div class="marquee-item">ממומן <span class="dot"></span></div>
+        </div>
+    </div>
+
+    <!-- ═══════ PAIN SECTION ═══════ -->
+    <section class="section-pain" style="position:relative;overflow:hidden;"><div class="win-pattern"></div><div class="win-watermark win-watermark-light" style="top:10%;right:-5%;">WIN WIN WIN</div><div class="win-watermark win-watermark-light" style="bottom:5%;left:-5%;transform:rotate(-8deg);">WINERIT</div>
+        <div class="pain-content reveal">
+            <div class="pain-label">THE TRUTH</div>
+            <h2 class="pain-title">כמעט עשור של ניסיון לימד אותי ש...</h2>
+            <p class="pain-subtitle">ככל הנראה לא חסר לך ידע, מוטיבציה, או מאמץ!</p>
+
+            <div class="pain-text">
+                את גוללת בפיד, רואה נשים אחרות — מצליחות, מרוויחות, נראה כאילו הכל בא להן בקלות.<br>
+                ובינינו? <strong>הן לא יותר מוצלחות ממך!</strong>
+
+                <span class="small-break"></span>
+
+                ואז את חוזרת לעסק שלך ומרגישה צביטה קטנה בלב.<br>
+                <span class="pink-bold">ככה לא נראה העסק שחלמת עליו.</span>
+            </div>
+
+            <div class="pain-box">
+                <p>
+                    <span class="pink-bold">הבעיה היא</span> שרוב הנשים בטוחות שהפתרון הוא טכני:<br>
+                    עוד סטורי, עוד עוקבים, או עוד קורס שיווק.<br>
+                    ובלי לשים לב הן עושות שוב ושוב את הפעולות <strong>שמחבלות להן בהצלחה!</strong><br><br>
+                    אז הן עובדות קשה, אבל <span class="pink-bold">נשארות תקועות באותה ההכנסה.</span>
+                </p>
+            </div>
+
+            <div class="pain-promise">
+                <p>
+                    עד סוף הדף הזה, אני הולכת <strong>להוכיח לך</strong>,<br>
+                    שהבעיה שלך היא לא חוסר ידע או משמעת עצמית.<br><br>
+                    וזה לא משנה לי מה תחליטי לעשות מכאן,<br>
+                    העיקר שתפסיקי להרגיש מתוסכלת, להלקות את עצמך שאת לא עושה מספיק,<br>
+                    ולהשתבלל בסוף חודש כשאת מבינה <strong>שעוד פעם לא פרצת את תקרת ההכנסות שלך.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ ABOUT CHEN ═══════ -->
+    <section class="section-about" style="position:relative;overflow:hidden;"><div class="win-watermark win-watermark-dark" style="bottom:15%;right:-8%;transform:rotate(8deg);">WIN WIN</div>
+        <div class="about-grid">
+            <div class="about-image-area reveal">
+                <div class="about-pink-frame"></div>
+                <img src="chen1.png"
+                     alt="חן כלפון" class="about-img">
+            </div>
+
+            <div class="reveal reveal-d1">
+                <div class="about-label">נעים מאוד</div>
+                <h2 class="about-title">
+                    אני <span class="script">חן כלפון</span><br>
+                    מייסדת תוכנית העסקים<br>
+                    לאמהות עצמאיות
+                </h2>
+                <p class="about-text">
+                    מייסדת תכנית <strong>"להרוויח כמו ווינרית ביזנס"</strong> ושיטת WIN להצלחה.
+                    יש לי מעל <span class="pink">50,000 עוקבים</span> ברשתות החברתיות,
+                    ועזרתי למאות נשים להכפיל את ההכנסות שלהן!
+                </p>
+                <p class="about-text">
+                    בשנים האחרונות ליוויתי מאות נשים בדרך לפריצת תקרת ה-30K בעזרת שיטת WIN שפיתחתי,
+                    וראיתי הכל — את הנשים שעובדות קשה ומרגישות תסכול כי ההכנסה תקועה,
+                    ואת אלה שהבינו <strong>ששום קורס שיווק לא יעזור כל עוד ״פצעי הכסף״ מנהלים אותן</strong>.
+                </p>
+
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="num">+50K</div>
+                        <div class="lbl">עוקבים</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="num">100+</div>
+                        <div class="lbl">בוגרות</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="num">30K+</div>
+                        <div class="lbl">יעד הכנסה</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ MY STORY ═══════ -->
+    <section class="section-story" style="position:relative;overflow:hidden;"><div class="win-pattern"></div><div class="win-watermark win-watermark-light" style="top:50%;left:50%;transform:translate(-50%,-50%) rotate(-5deg);">WIN</div>
+        <div class="story-content reveal">
+            <div class="pain-label">THE STORY</div>
+            <h2 class="pain-title" style="margin-bottom: 35px;">אני כותבת לך את זה כי <span class="script">גם אני הייתי שם</span></h2>
+
+            <div class="story-text">
+                הייתי בטוחה שהפתרון לבעיה שלי זה עוד קורס ועוד סטורי,<br>
+                והבעיה שלי אפילו הייתה יותר חמורה משלך,<br>
+                כי אני <strong>גם הייתי מפורסמת!</strong>
+
+                <span class="highlight-line">אבל הלקוחות לא הגיעו, וההכנסה נשארה תקועה על 8K</span>
+
+                ואני כל שנה מחדש, כמעט נוגעת בעוסק מורשה,<br>
+                <strong>אבל שוב נשארת עוסק פטור.</strong>
+
+                <span class="highlight-line">עד שמשהו השתנה.</span>
+
+                החלטתי להגשים חלום וללמוד טיפול,<br>
+                והפרקטיקום שלי היה — <span class="pink-bold">מערכת היחסים שלי עם כסף</span>,<br>
+                ושם קרה מהפך.<br><br>
+                <strong>בתוך 5 חודשים בלבד, עשיתי קפיצה עסקית מטאורית!</strong>
+            </div>
+
+            <div class="story-proof">
+                <p>📩 [כאן תיכנס הודעת עדות / צילום מסך]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ BREAKTHROUGH ═══════ -->
+    <section class="section-breakthrough" style="position:relative;overflow:hidden;"><div class="win-watermark win-watermark-light" style="top:20%;right:-10%;transform:rotate(5deg);">WIN WIN</div>
+        <div class="breakthrough-content reveal">
+            <div class="pain-label">THE BREAKTHROUGH</div>
+            <h2 class="pain-title" style="margin-bottom: 35px;">ופתאום <span class="script">קלטתי</span></h2>
+
+            <div class="breakthrough-text">
+                שכל השנים האלו, לא יכולתי להרוויח יותר כסף,<br>
+                כי <span class="pink-bold">המוח שלי היה מתוכנת לדחות כסף!</span><br>
+                לפחד מכסף!
+
+                <span class="highlight-line">הייתי בתודעה הישרדותית</span>
+
+                שבה הצלחה עסקית = פגיעה בבית, בילדים, בזוגיות.
+
+                <span class="highlight-line">ואז התחלתי להפעיל את הכלים הטיפוליים שלי</span>
+
+                על נשים שמגיעות אליי לייעוץ עסקי,<br>
+                ובתוך זמן קצר — <strong>עושות קפיצה מטאורית בעצמן!</strong><br><br>
+
+                וכך פיתחתי את <span class="pink-bold">שיטת WIN להצלחה!</span><br>
+                שיטה שעוזרת לנשים להפוך ל<span class="script">ווינריות</span> ולתכנת את המוח שלהן מחדש!<br><br>
+
+                ומי לא רוצה להיות בקרבת ווינרית ממגנטת?<br>
+                וממצב שאני רודפת אחרי לקוחות — <strong>הן מתמגנטות אליי!</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ VIDEO TESTIMONIALS ═══════ -->
+    <section class="section-videos">
+        <div class="section-tag reveal">SUCCESS STORIES</div>
+        <h2 class="section-title reveal">בדיוק אותו דבר <span class="script">קרה</span> לבנות בתכנית שלי</h2>
+
+        <div class="videos-grid">
+            <div class="video-placeholder reveal">
+                <div class="play-btn">▶</div>
+            </div>
+            <div class="video-placeholder reveal reveal-d1">
+                <div class="play-btn">▶</div>
+            </div>
+            <div class="video-placeholder reveal reveal-d2">
+                <div class="play-btn">▶</div>
+            </div>
+            <div class="video-placeholder reveal reveal-d3">
+                <div class="play-btn">▶</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ METHOD / 3 STEPS ═══════ -->
+    <section class="section-method" style="position:relative;overflow:hidden;"><div class="win-watermark win-watermark-dark" style="top:15%;left:-5%;transform:rotate(-3deg);">WIN WIN WIN</div><div class="win-watermark win-watermark-dark" style="bottom:10%;right:-5%;transform:rotate(5deg);">WINERIT</div>
+        <div class="method-intro reveal">
+            <div class="section-tag" style="color: rgba(247,245,241,0.3);">THE METHOD</div>
+            <h2 class="method-intro-title">
+                אז איך זה קורה, שבתוך <span class="pink">90 יום</span><br>
+                את הופכת מבעלת עסק שורדת<br>
+                ל<span class="script">ווינרית</span> חסרת מעצורים?
+            </h2>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <div class="step-num">01</div>
+                <h3 class="step-title">שחרור חסמים</h3>
+                <p class="step-text">אנחנו מאתרות את החסמים הכי עמוקים שלך, ומשחררות אותם בעזרת כלים טיפוליים מקצועיים</p>
+            </div>
+            <div class="step-card reveal reveal-d1">
+                <div class="step-num">02</div>
+                <h3 class="step-title">בניית סיסטמה</h3>
+                <p class="step-text">אנחנו לומדות את הסיסטמה הנכונה עבור העסק שלך, ובונות אותה מהיסוד כמו שצריך</p>
+            </div>
+            <div class="step-card reveal reveal-d2">
+                <div class="step-num">03</div>
+                <h3 class="step-title">מיומנויות ווינרית</h3>
+                <p class="step-text">אנחנו משפרות את כל המערכת עם מיומנויות של ווינרית שמקצרות לך זמן ונותנות לך מוטיבציה</p>
+            </div>
+        </div>
+
+        <div class="method-summary reveal">
+            <p>
+                או בקיצור, אנחנו בונות לך<br>
+                <strong>זהות, מיומנות מנצחת, ותכנית עבודה.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════ CAR METAPHOR ═══════ -->
+    <section class="section-metaphor" style="position:relative;overflow:hidden;"><div class="win-pattern"></div><div class="win-watermark win-watermark-gold" style="top:30%;left:50%;transform:translate(-50%,-50%) rotate(-3deg);">WIN</div>
+        <div class="metaphor-content reveal">
+            <div class="pain-label">THE METAPHOR</div>
+            <h2 class="metaphor-title">
+                אם נדמה את העסק שלך <span class="script">לרכב</span>
+            </h2>
+
+            <div class="metaphor-grid">
+                <div class="metaphor-card">
+                    <div class="metaphor-icon">👤</div>
+                    <h4>הזהות = הנהג</h4>
+                    <p>זו את. אם הנהג פוחד — לא תגיעי לשום מקום.</p>
+                </div>
+                <div class="metaphor-card">
+                    <div class="metaphor-icon">🎯</div>
+                    <h4>המיומנות = רישיון</h4>
+                    <p>כישורי הנהיגה שלך. בלי מיומנות — גם עם רצון לא תגיעי.</p>
+                </div>
+                <div class="metaphor-card">
+                    <div class="metaphor-icon">🗺️</div>
+                    <h4>תכנית עבודה = וויז</h4>
+                    <p>בלי ניווט שמכוון — גם עם מיומנות לא תגיעי ליעד.</p>
+                </div>
+            </div>
+
+            <div class="metaphor-text">
+                <span class="highlight-line">אז מה הפלא שעד עכשיו לא הצלחת?</span>
+
+                הלכת לקורס סושיאל, אבל <strong>לא פתרת את חסמי הבושה</strong>.<br>
+                הלכת לאימון מנטלי, אבל <strong>לא למישהו שיבנה לך תוכנית עבודה</strong>.<br>
+                הלכת למישהו שיבנה לך תוכנית, אבל <span class="pink-bold">אין לך זהות מנצחת</span> שתכיל את ההצלחה.<br><br>
+
+                <strong>מבינה?</strong><br>
+                הבטחתי שאוכיח לך שההצלחה שלך לא תלויה במשמעת העצמית שלך או במוטיבציה,<br>
+                <span class="pink-bold">ואני שומעת את האסימון שלך שנפל עכשיו — עד כאן.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ ACTION ═══════ -->
+    <section class="section-action" id="cta">
+        <div class="action-content reveal">
+            <div class="section-tag">NOW WHAT?</div>
+            <h2 class="action-title">
+                אז מה עושים <span class="script">עכשיו?</span><br>
+                בואי נהיה פרקטיות.
+            </h2>
+            <p class="action-text">
+                את קוראת את הסילבוס של התכנית, ו<strong>עף לך המוח</strong> מהעובדה שאת יכולה
+                בתוך 90 יום להפוך מעסק שורד לעסק רווחי ומצליח!<br><br>
+                ולהפוך להיות <strong>הווינרית שחלמת עליה</strong>,
+                כי נמאס לך להסתובב בעולם בתחושת "פוטנציאל"
+                והגיע הרגע שלך לפרוץ.
+            </p>
+            <a href="#" class="btn-cta-big">רוצה להשאיר פרטים</a>
+            <div class="cta-note">* נחזור אלייך לרשום אותך לתכנית</div>
+        </div>
+    </section>
+
+    <!-- ═══════ PROGRAM DETAILS ═══════ -->
+    <section class="section-program" style="position:relative;overflow:hidden;"><div class="win-pattern"></div><div class="win-watermark win-watermark-light" style="top:20%;left:-5%;transform:rotate(-5deg);">WIN WIN WIN</div>
+        <div class="section-tag reveal">THE PROGRAM</div>
+        <h2 class="section-title reveal">מה כוללת <span class="script">התכנית?</span></h2>
+        <p style="text-align:center; max-width:600px; margin:0 auto 50px; color:rgba(18,18,18,0.45); font-size:0.95rem;" class="reveal">
+            תכנית של 10 שבועות, שבה נלמד 8 יחידות תוכן שיהפכו אותך לבעלת עסק מנצח!
+        </p>
+
+        <div class="program-grid">
+            <div class="program-card reveal">
+                <div class="program-card-icon">🧠</div>
+                <h3>מרתון תכנות מחדש</h3>
+                <p>10 שבועות של עבודה על המסלולים העצביים שלך. אנחנו מנקות את הבושה, הפחד והאשמה מול כסף.</p>
+            </div>
+            <div class="program-card reveal reveal-d1">
+                <div class="program-card-icon">👑</div>
+                <h3>זהות הווינרית</h3>
+                <p>בניית זהות עסקית חזקה. כזו שלא מתנצלת על המחיר שלה ומושכת לקוחות פרימיום באופן טבעי.</p>
+            </div>
+            <div class="program-card reveal reveal-d2">
+                <div class="program-card-icon">💰</div>
+                <h3>מודל 30K+</h3>
+                <p>בניית מנגנון עסקי חכם. איך להכניס סכומים של 5 ספרות בלי להשתעבד לעסק ובלי לפספס את הילדים.</p>
+            </div>
+            <div class="program-card reveal reveal-d3">
+                <div class="program-card-icon">✨</div>
+                <h3>מפעל התוכן</h3>
+                <p>איך להפוך את הידע שלך למגנט של לקוחות במינימום זמן עבודה.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-card-icon">🤝</div>
+                <h3>ליווי צמוד</h3>
+                <p>זום LIVE בכל שבוע, קבוצת וואטסאפ פעילה, וקהילת ווינריות שדוחפת אותך לתוצאות.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FINAL CTA ═══════ -->
+    <section class="section-final-cta" style="position:relative;overflow:hidden;"><div class="win-watermark win-watermark-gold" style="top:40%;left:50%;transform:translate(-50%,-50%) rotate(-2deg);">WINERIT</div>
+        <div class="cta-pink-bg"></div>
+        <div class="cta-bg-script">Winnerit</div>
+
+        <div class="cta-content reveal">
+            <h2 class="cta-heading">
+                הגיע הרגע שלך<br>
+                <span class="script">להפוך לווינרית</span>
+            </h2>
+            <p class="cta-sub">
+                תשאירי פרטים ונחזור אלייך כדי לרשום אותך לתכנית.<br>
+                90 יום מעכשיו, את כבר לא אותה בעלת עסק.
+            </p>
+            <a href="#" class="btn-cta-big">רוצה להצטרף לתכנית</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">חן כלפון | שיטת WIN</div>
+            <div class="footer-links">
+                <a href="#">אינסטגרם</a>
+                <a href="#">צור קשר</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 חן כלפון — כל הזכויות שמורות</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('hidden'), 1800);
+        });
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
